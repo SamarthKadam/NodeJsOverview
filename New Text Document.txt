@@ -167,3 +167,60 @@ Mounting multiple routers
 We have paramter middle ware
 
 we have also got config.env= environment variables Go through it once
+
+
+MONGO DB
+So first lets go through the installation
+Firstly install the mongodb community version then MongodDB compass will get installed automatically
+1>In Local disk  C Create a file called data and create a file inside it called db ...Follow the video
+
+We can create a local database also Live database
+
+We create server using Windows power shell
+Then we connect to that server using Windows Power shell
+
+
+Command line approach
+First open the windows power shell and type the command mongod.exe It will be running in background
+then run the command mongo.exe then you are good to go
+1>show dbs command shows all the dbs
+2>you can use-dbsname to switch to the databases or to create database
+3>To display all the databases in the folder of that type db.filename.find()
+like in our case example it is db.tours.find()
+4>To insert the object type theh command db.tours.insertOne({}).for many object type db.tours.insert
+Many([{},{}])
+5>For reading specific data type below command
+db.tours.find({name:"relative-name"})
+type one of the fields of that object which you want to find
+
+6>For reading specific data with specific condition
+db.tours.find({price:{$lt:500}})
+lt means lower then we also we lte or gt meaning greater than 
+
+7>We can also find and condition like
+db.tours.find({price:{$lt:500},{rating:{$gt:4.7});
+
+8>We can also find or condition like
+db.tours.find({$or:[{price:{$lt:500},{rating:{$gt:4.7}}]})
+
+9>We can also update 
+db.tours.updateOne({name:"relative-name"},{$set:{price:48}})
+
+updateMany also goes the same way db.tours.updateMany({{name:"relative-name"},{price:{$gt:500}}},{$set:{whattoset:true}})
+
+10>We can also delete using db.tours.deleteOne({name:"relative"}) for many use deleteMany
+db.tours.deleteMany({})
+Above statements can delete all the objects
+
+Below is the command to delete the localdatabase
+> show dbs
+admin         0.000GB
+local         0.000GB
+tutorialkart  0.000GB
+> use tutorialkart
+switched to db tutorialkart
+> db.dropDatabase()
+{ "dropped" : "tutorialkart", "ok" : 1 }
+> show dbs
+admin  0.000GB
+local  0.000GB
