@@ -1,0 +1,169 @@
+1>So first is installation of the nodejs Just go to the official website and then install it. To check
+wheathter it is installed or not just go to windows terminal then type node -v which will let you
+know the version of the node.
+If it doesn't show any version try to reinstall it 
+2>Now why do we need nodejs?To run the javascript code outside the browser
+3>You can execute JS code in the terminal itself for it type node command then you are good to go
+to exit press .exit
+4>You can execute the module using the command node modulename.js
+then to exit press CTRl+C
+5>We can read and write file in the text file using the module fs
+const fs=require("fs");
+We can achieve using two ways 1>Synchrnous 2>Asynchrnous
+1>Synchronous
+
+*Readfile=const data=fs.readFileSync('textFilepath','type-of-charset');
+*Writefile= fs.writeFileSync('textOutputPath','The text you want to insert');
+
+Btw this is Blocking code so we don't prefer it
+
+2>Asynchrnous
+*Readfile= fs.readFile('textFilepath','utf-8',(err,data)=>{
+ console.log(data);
+});
+*writeFile=fs.writeFile('textFilepath','The text you want to write','utf-8',(err)=>{
+console.log("File writen");
+});
+
+*__dirname indicates the current directory:Which is string
+
+
+How can you create simple web server?for this you need to import module
+that is https;
+const http=require('http');
+
+const server= http.createServer((req,res)=>{
+res.end("hello from the server");///This would be displayed in the server page
+});
+
+server.listen(port,localhost,()=>{
+console.log("Server is running on portt 8000");
+}
+
+*NPM
+For any packages to be installed you need to set up package.json which can be made by command
+npm init
+We got two types of dependences 
+1>Dependencies=this is for the development.Kind of code section
+2>Devdependencies=this for to run the development, here we mention npm i xyz --save-dev or npm i xyz --global
+
+
+if we want to install something as dev dependencies we can install it as npm i nodemon --save-dev
+if we want to uninstall then run npm uninstall nodemon --save-dev
+
+if we want to run the local dependencies then define it in the scripts
+This would basically  run the local dependencies 
+
+
+we can also install the dev dependencies as global if we want to acess it from anywhere that is npm i nodemon  --global
+you can acess this from anywhere of the project by running command nodemon index.js
+if we want to uninstall the dev dependencies as global we can write npm uninstall nodemon --global
+
+
+we have npm something called version beside the dependencies those 3 groups are 
+1st group is called major version --- this can invole breaking changes
+2nd group is called minor version ---- new features doesn't not involve breaking changes
+3rd group is called patch version ---to fix bugs
+
+to check the outdated packages we can run the command npm outdated
+to update a dependecny write npm update dependency
+
+^ to accept minor and patch release
+~ we accept only minor versions
+
+
+Node js has two dependencies for 
+1> V8 =This helps in execution of javascript code into machine code
+2>libuv=This helps in giving acess to underlying computer operating system files system networking and
+more.It is completely written in C++
+
+
+Event loop=It is responsible for easy task  like executing callback
+Thread pool=For heavy work
+
+
+Node js Has got single thread. It will run in single thread so make sure you don't block the code
+by writing syncrhronous code
+
+Thread pool has got 4 additional threads
+File system API's
+cryptography compression
+DNS lookup 
+All this tasks are performed in the threadpool
+
+*Call backs are functions which are executed when another functions has finished execution
+
+
+EventLoop=All the application code that is inside the callback function will run in event loop
+events like newhttpsrequest ,timer expired, finished reading file all these will emit function as soon as they are done
+with their work
+out event loop will pick up events and call the function that are associated with each event
+
+
+
+Express:
+It is minimal Nodejs Framework
+It is writen using 100% Nodejs
+It has got simplfied routing , middlware,server-siderendering,response request model handling
+You can install it using command line typing npm i express
+
+*We shouldn't be using that http module then http.createserver((req,res)=>{
+}) then assign it to server then we should be listening. It is long and hectic process so we have Express
+
+IN express it is simple
+firstly 
+const express=require('express');
+const app=express();
+
+Here you can use multiple get put patch delete requests
+like
+
+app.get('/',(req,res)=>{
+res.status(200).json({message:"Done"})
+});
+
+*If you see above you would see it same as nodejs first you set header in response then the data
+
+
+app.listen(port,localhost,()=>{
+console.log("Express hosted server is running");
+});
+
+Here we have the concept of middleware where we have it in between the request and response cycle
+We can also build our own middle ware using 
+const express=require('express');
+const app=express();
+app.use((req,res,next){
+console.log("hello from the middleware");
+..........
+.......
+.........
+next()
+})
+*****
+Converting from least efficient to better efficent one
+app.get('/api/v1/users',(req,res)=>{
+res.status(200).json({message:"Done"})
+});
+app.post('/api/v1/users',(req,res)=>{
+res.status(200).json({message:"Done"})
+});
+
+We can reduce it to one step
+*****
+const getAllusers=(res,res)=>{
+res.status(200).json({message:"Done",data})
+}
+cosnt PostallUser=(res,res)=>{
+res.status(200).json({message:"Done",data})
+}
+
+app.route('/api/v1/users').get(getAllusers).post(PostallUser)
+
+*** 
+Mounting multiple routers
+===Using middleware implemented in real time project
+
+We have paramter middle ware
+
+we have also got config.env= environment variables Go through it once
