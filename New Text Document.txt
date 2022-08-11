@@ -224,3 +224,25 @@ switched to db tutorialkart
 > show dbs
 admin  0.000GB
 local  0.000GB
+
+
+Mongoose
+It is a driver that connects the application to the database.It is an framework of the MongodB
+*Its featuers
+
+schemas to model data and relationships,easy data validation,simple query API, middlware,etc
+
+How to use this?
+Firstly you need to import mongoose 
+const mongoose=require('mongoose');
+we would have mongodb database generated connection string found.Just store that it in variable DB
+then follow this process 
+mongoose.connnect(DB,{
+useNewUrlParser:true,
+    useCreateIndex:true,
+    useFindAndModify:false,
+    useUnifiedTopology:true
+});
+
+/////Above code is used for deprecation warnings
+
